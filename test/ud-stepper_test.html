@@ -9,7 +9,7 @@
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
 
-    <link rel="import" href="../ud-stepper.html">
+    <script type="module" src="../ud-stepper.js"></script>
   </head>
   <body>
 
@@ -25,28 +25,29 @@
       </template>
     </test-fixture>
 
-    <script>
-      suite('ud-stepper', () => {
+    <script type="module">
+import '../ud-stepper.js';
+suite('ud-stepper', () => {
 
-        test('instantiating the element with default properties works', () => {
-          const element = fixture('BasicTestFixture');
-          assert.equal(element.prop1, 'ud-stepper');
-          const elementShadowRoot = element.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello ud-stepper!');
-        });
+  test('instantiating the element with default properties works', () => {
+    const element = fixture('BasicTestFixture');
+    assert.equal(element.prop1, 'ud-stepper');
+    const elementShadowRoot = element.shadowRoot;
+    const elementHeader = elementShadowRoot.querySelector('h2');
+    assert.equal(elementHeader.innerHTML, 'Hello ud-stepper!');
+  });
 
-        test('setting a property on the element works', () => {
-          // Create a test fixture
-          const element = fixture('ChangedPropertyTestFixture');
-          assert.equal(element.prop1, 'new-prop1');
-          const elementShadowRoot = element.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello new-prop1!');
-        });
+  test('setting a property on the element works', () => {
+    // Create a test fixture
+    const element = fixture('ChangedPropertyTestFixture');
+    assert.equal(element.prop1, 'new-prop1');
+    const elementShadowRoot = element.shadowRoot;
+    const elementHeader = elementShadowRoot.querySelector('h2');
+    assert.equal(elementHeader.innerHTML, 'Hello new-prop1!');
+  });
 
-      });
-    </script>
+});
+</script>
 
   </body>
 </html>

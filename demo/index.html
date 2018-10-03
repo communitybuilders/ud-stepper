@@ -2,18 +2,33 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-  <title>ud-stepper demo</title>
+    <title>ud-stepper demo</title>
 
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 
-  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../ud-stepper.html">
+    `
+    <script type="module">
+      import '../ud-stepper.js';
+      import '@polymer/paper-button/paper-button.js';
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles.js';
+      import '@polymer/iron-demo-helpers/demo-snippet.js';
+    </script>
 
-  <custom-style>
+    <!-- FIXME(polymer-modulizer):
+          These imperative modules that innerHTML your HTML are
+          a hacky way to be sure that any mixins in included style
+          modules are ready before any elements that reference them are
+          instantiated, otherwise the CSS @apply mixin polyfill won't be
+          able to expand the underlying CSS custom properties.
+          See: https://github.com/Polymer/polymer-modulizer/issues/154
+          -->
+    <script type="module">
+      const $_documentContainer = document.createElement('template');
+
+      $_documentContainer.innerHTML = `<custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
       ud-step {
         height: 250px;
@@ -48,11 +63,17 @@
         color: white;
       }
     </style>
-  </custom-style>
+  </custom-style>`;
+
+      document.body.appendChild($_documentContainer.content);
+    </script>
 </head>
 
 <body>
-  <div class="vertical-section-container centered">
+<script type="module">
+  const $_documentContainer = document.createElement('template');
+
+  $_documentContainer.innerHTML = `<div class="vertical-section-container centered">
     <div class="demo-actions">
       <h3>Linear Stepper</h3>
       <div class="buttons">
@@ -62,7 +83,7 @@
     </div>
     <demo-snippet>
       <template>
-        <ud-stepper linear>
+        <ud-stepper linear="">
           <ud-step title="Step 1">
             <div slot="content">Step 1 Content</div>
           </ud-step>
@@ -75,8 +96,14 @@
         </ud-stepper>
       </template>
     </demo-snippet>
-  </div>
-  <div class="vertical-section-container centered">
+  </div>`;
+
+  document.body.appendChild($_documentContainer.content);
+</script>
+<script type="module">
+  const $_documentContainer = document.createElement('template');
+
+  $_documentContainer.innerHTML = `<div class="vertical-section-container centered">
     <div class="demo-actions">
       <h3>Non-Linear Stepper</h3>
       <div class="buttons">
@@ -86,7 +113,7 @@
     </div>
     <demo-snippet>
       <template>
-        <ud-stepper vertical>
+        <ud-stepper vertical="">
           <ud-step title="Step 1">
             <div slot="content">Step 1 Content</div>
           </ud-step>
@@ -99,8 +126,14 @@
         </ud-stepper>
       </template>
     </demo-snippet>
-  </div>
-  <div class="vertical-section-container centered">
+  </div>`;
+
+  document.body.appendChild($_documentContainer.content);
+</script>
+<script type="module">
+  const $_documentContainer = document.createElement('template');
+
+  $_documentContainer.innerHTML = `<div class="vertical-section-container centered">
     <div class="demo-actions">
       <h3>Linear Stepper with an editable step</h3>
       <div class="buttons">
@@ -110,8 +143,8 @@
     </div>
     <demo-snippet>
       <template>
-        <ud-stepper linear>
-          <ud-step title="Step 1" editable>
+        <ud-stepper linear="">
+          <ud-step title="Step 1" editable="">
             <div slot="content">Step 1 Content</div>
           </ud-step>
           <ud-step title="Step 2">
@@ -123,8 +156,14 @@
         </ud-stepper>
       </template>
     </demo-snippet>
-  </div>
-  <div class="vertical-section-container centered">
+  </div>`;
+
+  document.body.appendChild($_documentContainer.content);
+</script>
+<script type="module">
+  const $_documentContainer = document.createElement('template');
+
+  $_documentContainer.innerHTML = `<div class="vertical-section-container centered">
     <div class="demo-actions">
       <h3>Linear Stepper with an optional step</h3>
       <div class="buttons">
@@ -134,11 +173,11 @@
     </div>
     <demo-snippet>
       <template>
-        <ud-stepper linear>
+        <ud-stepper linear="">
           <ud-step title="Step 1">
             <div slot="content">Step 1 Content</div>
           </ud-step>
-          <ud-step title="Step 2" optional>
+          <ud-step title="Step 2" optional="">
             <div slot="content">Step 2 Content. You can skip me!</div>
           </ud-step>
           <ud-step title="Step 3">
@@ -147,8 +186,14 @@
         </ud-stepper>
       </template>
     </demo-snippet>
-  </div>
-  <div class="vertical-section-container centered">
+  </div>`;
+
+  document.body.appendChild($_documentContainer.content);
+</script>
+<script type="module">
+  const $_documentContainer = document.createElement('template');
+
+  $_documentContainer.innerHTML = `<div class="vertical-section-container centered">
     <div class="demo-actions">
       <h3>Linear Stepper with error state</h3>
       <div class="buttons">
@@ -158,8 +203,8 @@
     </div>
     <demo-snippet>
       <template>
-        <ud-stepper linear>
-          <ud-step title="Step 1" error>
+        <ud-stepper linear="">
+          <ud-step title="Step 1" error="">
             <div slot="content">Step 1 Content</div>
           </ud-step>
           <ud-step title="Step 2">
@@ -171,22 +216,23 @@
         </ud-stepper>
       </template>
     </demo-snippet>
-  </div>
-  <script>
-    window.addEventListener('WebComponentsReady', function () {
-      document.querySelectorAll('paper-button.reset').forEach(rs => {
-        rs.addEventListener('tap', (evt) => {
-          evt.target.parentElement.parentElement.parentElement.querySelector('ud-stepper').reset();
-        });
-      });
+  </div>`;
 
-      document.querySelectorAll('paper-button.toggle').forEach(rs => {
-        rs.addEventListener('tap', (evt) => {
-          evt.target.parentElement.parentElement.parentElement.querySelector('ud-stepper').toggleOrientation();
-        });
-      });
+  document.body.appendChild($_documentContainer.content);
+</script>
+<script type="module">
+  document.querySelectorAll('paper-button.reset').forEach(rs => {
+    rs.addEventListener('tap', (evt) => {
+      evt.target.parentElement.parentElement.parentElement.querySelector('ud-stepper').reset();
     });
-  </script>
+  });
+
+  document.querySelectorAll('paper-button.toggle').forEach(rs => {
+    rs.addEventListener('tap', (evt) => {
+      evt.target.parentElement.parentElement.parentElement.querySelector('ud-stepper').toggleOrientation();
+    });
+  });
+</script>
 </body>
 
 </html>
